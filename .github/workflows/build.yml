@@ -1,0 +1,22 @@
+name: C++ CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure CMake
+        run: cmake -DVERSION_PROJECT=${{ github.run_number }} .
+
+      - name: Build
+        run: cmake --build .
+
+      - name: Run program
+        run: ./LAB2

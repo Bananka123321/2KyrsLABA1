@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.10.0)
+project(LAB2 VERSION 0.1.0 LANGUAGES C CXX)
+
+if(DEFINED VERSION_PROJECT)
+    add_definitions(-DVERSION_PROJECT=${VERSION_PROJECT})
+else()
+    add_definitions(-DVERSION_PROJECT=0)
+endif()
+
+add_executable(LAB2 main.cpp)
+
