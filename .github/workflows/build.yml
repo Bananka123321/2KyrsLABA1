@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Configure (Ninja)
-        run: cmake -G "Ninja" -S . -B build -DPATCH_VERSION=${{ github.run_number }}
+        run: cmake -G "Ninja" -S . -B build -DVERSION_PROJECT=${{ github.run_number }}
 
       - name: Build
         run: cmake --build build
