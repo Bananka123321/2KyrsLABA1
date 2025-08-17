@@ -13,9 +13,9 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Configure CMake
-        run: cmake -B build -DVERSION_PROJECT=${{ github.run_number }} .
+
+      - name: Configure (Ninja)
+        run: cmake -G "Ninja" -S . -B build -DPATCH_VERSION=${{ github.run_number }}
 
       - name: Build
         run: cmake --build build
