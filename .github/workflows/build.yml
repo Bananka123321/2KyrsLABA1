@@ -6,17 +6,24 @@ on:
       - main
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-
       - name: Configure CMake
         run: cmake -DVERSION_PROJECT=${{ github.run_number }} .
-
       - name: Build
         run: cmake --build .
-
       - name: Run program
-        run: ./LAB2
+        run: ./LAB1
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure CMake
+        run: cmake -DVERSION_PROJECT=${{ github.run_number }} .
+      - name: Build
+        run: cmake --build .
+      - name: Run program
+        run: .\Debug\LAB1.exe
