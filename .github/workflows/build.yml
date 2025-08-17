@@ -6,24 +6,25 @@ on:
       - main
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v3
+      
       - name: Configure CMake
-        run: cmake -DVERSION_PROJECT=${{ github.run_number }} .
-      - name: Build
-        run: cmake --build .
-      - name: Run program
-        run: ./LAB1
+        run: cmake -B build -DVERSION_PROJECT=${{ github.run_number }} .
 
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Configure CMake
-        run: cmake -DVERSION_PROJECT=${{ github.run_number }} .
       - name: Build
-        run: cmake --build .
-      - name: Run program
-        run: .\Debug\LAB1.exe
+        run: cmake --build build
+
+      - name: Run
+        shell: bash
+        run: |
+          if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+            ./build/LAB1
+          else
+            ./build/LAB1.exe
+          fi
