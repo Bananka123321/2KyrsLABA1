@@ -64,7 +64,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create-release.outputs.new_tag }}
-          files: package/*.deb
+          files: *.deb
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -90,6 +90,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create-release.outputs.new_tag }}
-          files: package/*.zip
+          files: *.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
