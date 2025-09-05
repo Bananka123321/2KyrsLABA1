@@ -10,19 +10,19 @@ endif()
 add_executable(LAB1 main.cpp)
 
 
-include(CPack)
 
 set(CPACK_PACKAGE_NAME "LAB1")
 
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 
 if(WIN32)
-    set(CPACK_GENERATOR "ZIP")
+set(CPACK_GENERATOR "ZIP")
 endif()
 
 if(UNIX AND NOT APPLE)
-    set(CPACK_GENERATOR "DEB")
-    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Ivan Obuhov <vanushabrend@gmail.com>")
+set(CPACK_GENERATOR "DEB")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Ivan Obuhov <vanushabrend@gmail.com>")
 endif()
 
 install(TARGETS LAB1 DESTINATION bin)
+include(CPack)
