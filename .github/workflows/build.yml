@@ -58,13 +58,13 @@ jobs:
         run: ./build/LAB1
 
       - name: Package (Linux)
-        run: cmake --build build --target package
+        run: cmake --install build --prefix package && cpack -G DEB --config build/CPackConfig.cmake
 
       - name: Upload Linux package
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create-release.outputs.new_tag }}
-          files: build/*.deb
+          files: package/*.deb
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -84,12 +84,12 @@ jobs:
         run: build/LAB1.exe
 
       - name: Package (Windows)
-        run: cmake --build build --target package
+        run: cmake --install build --prefix package && cpack -G ZIP --config build/CPackConfig.cmake
 
       - name: Upload Windows package
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create-release.outputs.new_tag }}
-          files: build/*.zip
+          files: package/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
